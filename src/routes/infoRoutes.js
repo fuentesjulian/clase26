@@ -3,7 +3,7 @@ const router = express.Router();
 
 export default router.get("/", (req, res) => {
   const data = [];
-  data.push({ "Argumento de entrada": process.argv[1] });
+  data.push({ "Argumento de entrada": process.argv.slice(2) });
   data.push({ "Nombre de la plataforma": process.platform });
   data.push({ "Version de node.js": process.version });
   data.push({ "Memoria total reservada (ress)": process.memoryUsage.rss() });
