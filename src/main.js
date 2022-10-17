@@ -12,7 +12,7 @@ import MongoStore from "connect-mongo";
 import * as dotenv from "dotenv";
 import Yargs from "yargs";
 import infoRoutes from "./routes/infoRoutes.js"
-
+import randomGenRoutes from "./routes/randomGenRoutes.js"
 dotenv.config();
 //--------------------------------------------
 // instancio servidor, socket y api
@@ -73,7 +73,7 @@ app.use(express.static("public"));
 
 // setteo sesiones
 const sessionStore = MongoStore.create({
-  mongoUrl: process.env.MONGOBD_CONNECTION_STRING,
+  mongoUrl: "mongodb://localhost:27017/testdb",
   /* ttl: 60,*/
 });
 
@@ -202,7 +202,12 @@ app.get("/signup-error", isLoggedOut, (req, res) => {
   });
 });
 
+// agrego la ruta de info
 app.use("/info", infoRoutes)
+
+// agrego la ruta generadora de randoms
+app.use("/api/randoms", randomGenRoutes)
+
 //--------------------------------------------
 // inicio el servidor
 
