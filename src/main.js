@@ -10,6 +10,7 @@ import * as msgNormalizer from "./utils/normalizer.js";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import * as dotenv from "dotenv";
+import Yargs from "yargs";
 
 dotenv.config();
 //--------------------------------------------
@@ -202,7 +203,10 @@ app.get("/signup-error", isLoggedOut, (req, res) => {
 //--------------------------------------------
 // inicio el servidor
 
-const PORT = 8080;
+const yargs = Yargs(process.argv.slice(2));
+const args = yargs.alias({ p: "port" }).default({ port: 8080 }).argv;
+
+const PORT = args.port;
 const connectedServer = httpServer.listen(PORT, () => {
   console.log(`Servidor http escuchando en el puerto ${connectedServer.address().port}`);
 });
