@@ -11,6 +11,7 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import * as dotenv from "dotenv";
 import Yargs from "yargs";
+import infoRoutes from "./routes/infoRoutes.js"
 
 dotenv.config();
 //--------------------------------------------
@@ -200,6 +201,8 @@ app.get("/signup-error", isLoggedOut, (req, res) => {
     redirect: "signup",
   });
 });
+
+app.use("/info", infoRoutes)
 //--------------------------------------------
 // inicio el servidor
 
