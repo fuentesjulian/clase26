@@ -9,7 +9,9 @@ import * as msgsConfig from "./config/msgs.js";
 import * as msgNormalizer from "./utils/normalizer.js";
 import session from "express-session";
 import MongoStore from "connect-mongo";
+import * as dotenv from "dotenv";
 
+dotenv.config();
 //--------------------------------------------
 // instancio servidor, socket y api
 
@@ -18,10 +20,7 @@ const httpServer = new HttpServer(app);
 const io = new Socket(httpServer);
 
 const productosApi = new ContenedorSQL(config.mariaDb, "productos");
-const mensajesApi = new MongoDbContainer(
-  msgsConfig.msgsCollection,
-  msgsConfig.msgsSchema
-);
+const mensajesApi = new MongoDbContainer(msgsConfig.msgsCollection, msgsConfig.msgsSchema);
 
 //--------------------------------------------
 // configuro el socket
@@ -72,8 +71,7 @@ app.use(express.static("public"));
 
 // setteo sesiones
 const sessionStore = MongoStore.create({
-  mongoUrl:
-    "mongodb+srv://julianfuentes32065:7zIuxnSeGa1IPDuu@cluster0.xgss0v1.mongodb.net/testdb?retryWrites=true&w=majority",
+  mongoUrl: process.env.MONGOBD_CONNECTION_STRING,
   /* ttl: 60,*/
 });
 
@@ -206,10 +204,6 @@ app.get("/signup-error", isLoggedOut, (req, res) => {
 
 const PORT = 8080;
 const connectedServer = httpServer.listen(PORT, () => {
-  console.log(
-    `Servidor http escuchando en el puerto ${connectedServer.address().port}`
-  );
+  console.log(`Servidor http escuchando en el puerto ${connectedServer.address().port}`);
 });
-connectedServer.on("error", (error) =>
-  console.log(`Error en servidor ${error}`)
-);
+connectedServer.on("error", (error) => console.log(`Error en servidor ${error}`));
