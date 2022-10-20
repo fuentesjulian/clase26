@@ -11,8 +11,8 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import * as dotenv from "dotenv";
 import Yargs from "yargs";
-import infoRoutes from "./routes/infoRoutes.js"
-import randomGenRoutes from "./routes/randomGenRoutes.js"
+import infoRoutes from "./routes/infoRoutes.js";
+import randomGenRoutes from "./routes/randomGenRoutes.js";
 dotenv.config();
 //--------------------------------------------
 // instancio servidor, socket y api
@@ -22,7 +22,10 @@ const httpServer = new HttpServer(app);
 const io = new Socket(httpServer);
 
 const productosApi = new ContenedorSQL(config.mariaDb, "productos");
-const mensajesApi = new MongoDbContainer(msgsConfig.msgsCollection, msgsConfig.msgsSchema);
+const mensajesApi = new MongoDbContainer(
+  msgsConfig.msgsCollection,
+  msgsConfig.msgsSchema
+);
 
 //--------------------------------------------
 // configuro el socket
@@ -39,6 +42,7 @@ const processMsgData = (msgData) => {
   return msgNormalizer.getNormalized(originalData);
 };
 import util from "util";
+
 io.on("connection", async (socket) => {
   // apenas se genera la conexión tengo que cargar mensajes y productos
   const productos = await productosApi.listarAll();
@@ -123,18 +127,8 @@ app.use(passport.session());
 app.set("views", "./views");
 app.set("view engine", "ejs");
 
-// ### MIDDLEWARES de login
-// middlewares para no entrar al home sin login y para no loggearme 2 veces
-// si estoy loggeado llama a next, sino hace un redirect al login
-const isLoggedIn = (req, res, next) => {
-  if (!req.isAuthenticated()) return res.redirect("/login");
-  next();
-};
-// si estoy no estoy loggeado llama anext, sino hace un redirect al home
-const isLoggedOut = (req, res, next) => {
-  if (req.isAuthenticated()) return res.redirect("/");
-  next();
-};
+// Middlewares
+import { isLoggedIn, isLoggedOut } from "./middleWares/authentication.js";
 
 // rutas
 // el get de login tiene un middleware para que no hacer un login 2 veces
@@ -203,10 +197,10 @@ app.get("/signup-error", isLoggedOut, (req, res) => {
 });
 
 // agrego la ruta de info
-app.use("/info", infoRoutes)
+app.use("/info", infoRoutes);
 
 // agrego la ruta generadora de randoms
-app.use("/api/randoms", randomGenRoutes)
+app.use("/api/randoms", randomGenRoutes);
 
 //--------------------------------------------
 // inicio el servidor
@@ -216,6 +210,10 @@ const args = yargs.alias({ p: "port" }).default({ port: 8080 }).argv;
 
 const PORT = args.port;
 const connectedServer = httpServer.listen(PORT, () => {
-  console.log(`Servidor http escuchando en el puerto ${connectedServer.address().port}`);
+  console.log(
+    `Servidor http escuchando en el puerto ${connectedServer.address().port}`
+  );
 });
-connectedServer.on("error", (error) => console.log(`Error en servidor ${error}`));
+connectedServer.on("error", (error) =>
+  console.log(`Error en servidor ${error}`)
+);
