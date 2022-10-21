@@ -3,13 +3,13 @@ import { Server as HttpServer } from "http";
 import { Server as Socket } from "socket.io";
 import ContenedorSQL from "./contenedores/ContenedorSQL.js";
 import config from "./config.js";
-import * as fakeProdApi from "./api/fakeProds.js";
 import MongoDbContainer from "./contenedores/ContenedorMongoDB.js";
 import * as msgsConfig from "./config/msgs.js";
 import * as msgNormalizer from "./utils/normalizer.js";
 import * as dotenv from "dotenv";
 import Yargs from "yargs";
 import infoRoutes from "./routes/infoRoutes.js";
+import fakeProdsRoutes from "./routes/fakeProdsRoutes.js";
 import randomGenRoutes from "./routes/randomGenRoutes.js";
 dotenv.config();
 //--------------------------------------------
@@ -125,10 +125,8 @@ app.get("/", isLoggedIn, (req, res) => {
   res.render("index", { nombre: req.user.email });
 });
 
-app.get("/api/productos-test", (req, res) => {
-  const fakeProds = fakeProdApi.generateMany(5);
-  res.send(fakeProds);
-});
+// agrego la ruta generadora de randoms
+app.use("/api/productos-test", fakeProdsRoutes);
 
 // en el template del profe hay un get para el logout
 // realmente no se si es lo correcto, siento que deberia ser un post o un delete
