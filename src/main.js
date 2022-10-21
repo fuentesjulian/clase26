@@ -7,8 +7,6 @@ import * as fakeProdApi from "./api/fakeProds.js";
 import MongoDbContainer from "./contenedores/ContenedorMongoDB.js";
 import * as msgsConfig from "./config/msgs.js";
 import * as msgNormalizer from "./utils/normalizer.js";
-import session from "express-session";
-import MongoStore from "connect-mongo";
 import * as dotenv from "dotenv";
 import Yargs from "yargs";
 import infoRoutes from "./routes/infoRoutes.js";
@@ -41,7 +39,6 @@ const processMsgData = (msgData) => {
   const originalData = { id: "mensajes", mensajes: plainMsgs };
   return msgNormalizer.getNormalized(originalData);
 };
-import util from "util";
 
 io.on("connection", async (socket) => {
   // apenas se genera la conexión tengo que cargar mensajes y productos
@@ -75,49 +72,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-// setteo sesiones
-const sessionStore = MongoStore.create({
-  mongoUrl: "mongodb://localhost:27017/testdb",
-  /* ttl: 60,*/
-});
-
-app.use(
-  session({
-    store: sessionStore,
-    secret: "sessionSecret",
-    resave: false,
-    saveUninitialized: false,
-    rolling: true,
-    cookie: {
-      maxAge: 10 * 60 * 1000,
-    },
-  })
-);
+// configuro sesion
+import session from "./middleWares/session.js";
+app.use(session);
 
 // configuro passport
-
-// creo las estrategias
-// quiero que en vez que tomar username use el campo que se llama email
-const strategyOptions = { usernameField: "email" };
-// importo las estrategia de passport-local
-import { Strategy as LocalStrategy } from "passport-local";
-import * as userService from "./services/userService.js";
-// dos estrategias, signup y login
-const signupStrategy = new LocalStrategy(strategyOptions, userService.signup);
-const loginStrategy = new LocalStrategy(strategyOptions, userService.login);
-// importo passport
 import passport from "passport";
-//asigno las estrategias
-passport.use("signup", signupStrategy);
-passport.use("login", loginStrategy);
-
-// creo las funciones de serialize/deserialize user
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
-passport.deserializeUser(async (id, done) => {
-  return done(null, await userService.getUserById(id));
-});
+import * as userService from "./services/userService.js";
+import passportConfig from "./config/passport.js";
+passportConfig(passport, userService);
 
 // inicio passport y lo vinculo a la sesión
 app.use(passport.initialize());
