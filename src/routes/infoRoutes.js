@@ -1,5 +1,6 @@
 import express from "express";
 const router = express.Router();
+import os from "os";
 
 export default router.get("/", (req, res) => {
   const data = [];
@@ -10,5 +11,6 @@ export default router.get("/", (req, res) => {
   data.push({ "Path de ejecucion": process.argv[0] });
   data.push({ "Process id": process.pid });
   data.push({ "Carpeta del proyecto": process.cwd() });
+  data.push({ "Numero de procesadores": os.cpus().length });
   res.send(data);
 });

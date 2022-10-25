@@ -1,7 +1,6 @@
 import express from "express";
 import { Server as HttpServer } from "http";
 import { Server as Socket } from "socket.io";
-import Yargs from "yargs";
 import infoRoutes from "./routes/infoRoutes.js";
 import fakeProdsRoutes from "./routes/fakeProdsRoutes.js";
 import randomGenRoutes from "./routes/randomGenRoutes.js";
@@ -9,7 +8,7 @@ import randomGenRoutes from "./routes/randomGenRoutes.js";
 //--------------------------------------------
 // instancio servidor, socket y api
 const app = express();
-const httpServer = new HttpServer(app);
+export const httpServer = new HttpServer(app);
 const io = new Socket(httpServer);
 
 //--------------------------------------------
@@ -69,17 +68,6 @@ app.use("/info", infoRoutes);
 // agrego la ruta de la api generadora de nros randoms
 app.use("/api/randoms", randomGenRoutes);
 
-//--------------------------------------------
-// inicio el servidor
-const yargs = Yargs(process.argv.slice(2));
-const args = yargs.alias({ p: "port" }).default({ port: 8080 }).argv;
 
-const PORT = args.port;
-const connectedServer = httpServer.listen(PORT, () => {
-  console.log(
-    `Servidor http escuchando en el puerto ${connectedServer.address().port}`
-  );
-});
-connectedServer.on("error", (error) =>
-  console.log(`Error en servidor ${error}`)
-);
+
+
