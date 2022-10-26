@@ -13,6 +13,8 @@ El servidor puede recibir como argumentos:
 ```sh
 node src/server.js --port=8081 --mode=CLUSTER
 node src/server.js --port=8082 --mode=FORK
+node src/server.js -p=8081 -m=CLUSTER
+node src/server.js -p=8082 -m=FORK
 ```
 ### Ejecución con **nodemon**
 Hay que asegurarse tener **nodemon** instalado. Para instalarlo globalmente correr:
@@ -57,12 +59,12 @@ Para ejecutar con PM2 se debe correr **pm2 start**. Se puede definir el nombre d
 
 Ejemplo:
 ```sh
-pm2 start src/server.js --name=servidor --watch -- -p=8081
+pm2 start src/server.js --name=servidor --watch -- --port=8081
 ```
 ##### Modo cluster
 Para correr en modo cluster se debe agregar **-i** y la cantidad de procesos. Si se pasa como parámetro **-i max** se corren tantos procesos como procesadores tenga el CPU.
 ```sh
-pm2 start src/server.js --name=servidor --watch -i max -- -p=8081
+pm2 start src/server.js --name=servidor --watch -i max -- --port=8081
 ```
 **Nota**: este modo de ejecución para este servidor generará escuchas sobre el mismo puerto generando conflictos.
 Para listar los procesos por sistema operativo se agrega el parámetro **list**:
@@ -74,3 +76,30 @@ Para terminar los procesos correr forever agregando el parámetro **delete**. Se
 pm2 delete all
 ```
 ### Ejecución con **Nginx**
+Se plantean dos situaciones simulando diferentes usos para evaluar funcionalidades.
+##### Caso 1: simulando modo cluster nativo
+Se quiere redirigir todas las consultas a /api/randoms a un cluster de servidores escuchando en el puerto 8081. El cluster será creado desde node utilizando el módulo nativo cluster. Para hacer esto se debe iniciar el servidor. Con pm2:
+```sh
+pm2 start src/server.js --name=servidor1 --watch -- --port=8081 --mode=CLUSTER
+```
+El resto de las consultas, redirigirlas a un servidor individual escuchando en el puerto 8080. Para hacer esto primero se debe iniciar el servidor. Con pm2:
+```sh
+pm2 start src/server.js --name=servidor2 --watch
+```
+Los servidores deberían estar corriendo en los puertos 8080 y 8081.
+Renombrar el archivo **nginx.conf.caso1** a **nginx.conf** y ubicarlo en la carpeta conf de nginx y luego ejecutar nginx. Nginx debería estar levantando el servidor en el puerto 80.
+##### Caso 2: simulando clusters gestionados desde nginx
+Se quiere redigir todas las consultas a /api/randoms a un cluster de servidores gestionado desde nginx, repartiéndolas equitativamente entre 4 instancias escuchando en los puertos 8082, 8083, 8084 y 8085 respectivamente, manteniendo el resto de las consultas en el puerto 8080.
+El servidor del puerto 8080 no requiere modificaciones en su modo de ejecución a comparación con el caso anterior.
+```sh
+pm2 start src/server.js --name=servidor1 --watch 
+```
+Se corren 4 servidores, en los puertos 8082, 8083, 8084 y 8085.
+```sh
+pm2 start src/server.js --name=servidor2 --watch -- --port=8082
+pm2 start src/server.js --name=servidor3 --watch -- --port=8083
+pm2 start src/server.js --name=servidor4 --watch -- --port=8084
+pm2 start src/server.js --name=servidor5 --watch -- --port=8085
+```
+Los servidores deberían estar corriendo en los puertos 8080, 8082, 8083, 8084 y 8085.
+Renombrar el archivo **nginx.conf.caso2** a **nginx.conf** y ubicarlo en la carpeta conf de nginx y luego ejecutar nginx. Nginx debería estar levantando el servidor en el puerto 80.
