@@ -87,7 +87,7 @@ El resto de las consultas, redirigirlas a un servidor individual escuchando en e
 pm2 start src/server.js --name=servidor2 --watch
 ```
 Los servidores deberían estar corriendo en los puertos 8080 y 8081.
-Renombrar el archivo **nginx.conf.caso1** a **nginx.conf** y ubicarlo en la carpeta conf de nginx y luego ejecutar nginx. Nginx debería estar levantando el servidor en el puerto 80.
+Renombrar el archivo **nginx.conf.opt1** a **nginx.conf** y ubicarlo en la carpeta conf de nginx y luego ejecutar nginx. Nginx debería estar levantando el servidor en el puerto 80.
 ##### Caso 2: simulando clusters gestionados desde nginx
 Se quiere redigir todas las consultas a /api/randoms a un cluster de servidores gestionado desde nginx, repartiéndolas equitativamente entre 4 instancias escuchando en los puertos 8082, 8083, 8084 y 8085 respectivamente, manteniendo el resto de las consultas en el puerto 8080.
 El servidor del puerto 8080 no requiere modificaciones en su modo de ejecución a comparación con el caso anterior.
@@ -102,4 +102,4 @@ pm2 start src/server.js --name=servidor4 --watch -- --port=8084
 pm2 start src/server.js --name=servidor5 --watch -- --port=8085
 ```
 Los servidores deberían estar corriendo en los puertos 8080, 8082, 8083, 8084 y 8085.
-Renombrar el archivo **nginx.conf.caso2** a **nginx.conf** y ubicarlo en la carpeta conf de nginx y luego ejecutar nginx. Nginx debería estar levantando el servidor en el puerto 80.
+Renombrar el archivo **nginx.conf.opt2** a **nginx.conf** y ubicarlo en la carpeta conf de nginx y luego ejecutar nginx. Nginx debería estar levantando el servidor en el puerto 80.
