@@ -36,6 +36,18 @@ const runCluster = (port) => {
     );
   }
 };
+
+//--------------------------------------------
+// funcion runCluster que corre el servidor normalmente
+// toma como parametro el puerto
+const runNormal = (port) => {
+  const connectedServer = httpServer.listen(port, () => {
+    console.log(
+      `Servidor http escuchando en el puerto ${connectedServer.address().port}`
+    );
+  });
+};
+
 //--------------------------------------------
 // inicio el servidor
 const yargs = Yargs(process.argv.slice(2));
@@ -56,4 +68,5 @@ switch (MODE) {
     break;
 
   default:
+
 }
