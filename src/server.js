@@ -67,6 +67,8 @@ switch (MODE) {
     runFork(PORT);
     break;
 
+  case "NORMAL":
+    runNormal(PORT);
+    break;
   default:
-
 }
