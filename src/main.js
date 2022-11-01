@@ -4,12 +4,16 @@ import { Server as Socket } from "socket.io";
 import infoRoutes from "./routes/infoRoutes.js";
 import fakeProdsRoutes from "./routes/fakeProdsRoutes.js";
 import randomGenRoutes from "./routes/randomGenRoutes.js";
-
+import compression from "compression";
 //--------------------------------------------
 // instancio servidor, socket y api
 const app = express();
 export const httpServer = new HttpServer(app);
 const io = new Socket(httpServer);
+
+//--------------------------------------------
+// agrego middleware de compresion
+app.use(compression());
 
 //--------------------------------------------
 // configuro el socket
@@ -67,7 +71,3 @@ app.use("/api/productos-test", fakeProdsRoutes);
 app.use("/info", infoRoutes);
 // agrego la ruta de la api generadora de nros randoms
 app.use("/api/randoms", randomGenRoutes);
-
-
-
-
