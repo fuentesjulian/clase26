@@ -1,4 +1,5 @@
 import knex from "knex";
+import logger from "../log/logger.js";
 
 class ContenedorSQL {
   constructor(config, tabla) {
@@ -12,7 +13,7 @@ class ContenedorSQL {
       const data = JSON.parse(JSON.stringify(resultado));
       return data;
     } catch (error) {
-      console.log(error);
+      logger.error(error);
     }
   }
 
@@ -22,7 +23,7 @@ class ContenedorSQL {
       const data = JSON.parse(JSON.stringify(resultado));
       return data;
     } catch (error) {
-      console.log(error);
+      logger.error(error);
     }
   }
 
@@ -31,7 +32,7 @@ class ContenedorSQL {
       const elemId = await this.knex(this.tabla).insert(elem);
       return elemId;
     } catch (error) {
-      console.log(error);
+      logger.error(error);
     }
   }
 
@@ -39,7 +40,7 @@ class ContenedorSQL {
     try {
       await this.knex(this.tabla).where("id", id).update(elem);
     } catch (error) {
-      console.log(error);
+      logger.error(error);
     }
   }
 
@@ -47,7 +48,7 @@ class ContenedorSQL {
     try {
       await this.knex(this.tabla).where("id", id).del();
     } catch (error) {
-      console.log(error);
+      logger.error(error);
     }
   }
 
@@ -55,7 +56,7 @@ class ContenedorSQL {
     try {
       await this.knex(this.tabla).del();
     } catch (error) {
-      console.log(error);
+      logger.error(error);
     }
   }
 
@@ -63,7 +64,7 @@ class ContenedorSQL {
     try {
       await this.knex.destroy();
     } catch (error) {
-      console.log(error);
+      logger.error(error);
     }
   }
 }
