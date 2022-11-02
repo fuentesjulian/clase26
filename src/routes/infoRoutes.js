@@ -12,5 +12,7 @@ export default router.get("/", (req, res) => {
   data.push({ "Process id": process.pid });
   data.push({ "Carpeta del proyecto": process.cwd() });
   data.push({ "Numero de procesadores": os.cpus().length });
+  // Activo o desactivo el console.log de la data
+  // console.log(data)
   res.send(data);
 });

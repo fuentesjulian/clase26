@@ -53,7 +53,7 @@ const runNormal = (port) => {
 const yargs = Yargs(process.argv.slice(2));
 const args = yargs
   .alias({ p: "port", m: "mode" })
-  .default({ port: 8080, mode: "FORK" }).argv;
+  .default({ port: 8080, mode: "NORMAL" }).argv;
 
 const PORT = args.port;
 const MODE = args.mode;

@@ -2,7 +2,7 @@ const genRand = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-const genRandoms = (randomCount) => {
+export const genRandoms = (randomCount) => {
   let randomArray = [];
   for (let i = 1; i <= 1000; i++) {
     const randomObj = { number: i, count: 0 };
