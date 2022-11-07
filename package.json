@@ -5,10 +5,7 @@
   "description": "",
   "main": "src/main.js",
   "scripts": {
-    "initTables": "node ./scripts/crearTablas.js",
-    "test": "npm run initTables && node ./test.js",
-    "initApp": "node ./src/main.js",
-    "start": "npm run initTables && npm run initApp"
+    "start": "node ./src/server.js"
   },
   "keywords": [],
   "author": "",
