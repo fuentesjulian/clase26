@@ -55,7 +55,7 @@ const args = yargs
   .alias({ p: "port", m: "mode" })
   .default({ port: 8080, mode: "NORMAL" }).argv;
 
-const PORT = args.port;
+const PORT = process.env.PORT || 8080;
 const MODE = args.mode;
 
 switch (MODE) {
