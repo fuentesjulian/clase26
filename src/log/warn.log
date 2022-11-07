@@ -726,3 +726,8 @@
 {"level":"warn","message":"Ruta: /favicon.ico - metodo: GET"}
 {"level":"warn","message":"Ruta: /favicon.ico - metodo: GET"}
 {"level":"warn","message":"Ruta: /favicon.ico - metodo: GET"}
+{"level":"warn","message":"Ruta: /favicon.ico - metodo: GET"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-4078,"fatal":true,"level":"error","port":3306,"syscall":"connect"}
+{"level":"warn","message":"Ruta: /favicon.ico - metodo: GET"}
+{"level":"warn","message":"Ruta: /favicon.ico - metodo: GET"}
+{"level":"warn","message":"Ruta: /favicon.ico - metodo: GET"}
