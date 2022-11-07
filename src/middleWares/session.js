@@ -1,9 +1,11 @@
 import MongoStore from "connect-mongo";
 import session from "express-session";
+import * as dotenv from "dotenv";
 
+dotenv.config();
 // setteo sesiones
 const sessionStore = MongoStore.create({
-  mongoUrl: "mongodb://localhost:27017/testdb",
+  mongoUrl: process.env.MONGOBD_CONNECTION_STRING,
   /* ttl: 60,*/
 });
 

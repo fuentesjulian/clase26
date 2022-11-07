@@ -10,7 +10,7 @@ const options = {
 
 dotenv.config();
 
-await mongoose.connect("mongodb+srv://julian:F45RAWGZIG2VOPP8@cluster0.hul4loa.mongodb.net/?retryWrites=true&w=majority", options);
+await mongoose.connect(process.env.MONGOBD_CONNECTION_STRING, options);
 
 
 export default class MongoDbContainer {
