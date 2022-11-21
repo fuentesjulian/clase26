@@ -64,7 +64,7 @@ app.get("/", isLoggedIn, (req, res) => {
 //--------------------------------------------
 // authRouter donde esta la estrategia de autenticacion
 const authRouter = express.Router();
-import { configAuthRouter } from "./config/authRouter.js";
+import { configAuthRouter } from "./routes/authRouter.js";
 configAuthRouter(authRouter, passport);
 app.use("/", authRouter);
 
