@@ -7,7 +7,7 @@ class ContenedorSQL {
     this.tabla = tabla;
   }
 
-  async listar(id) {
+  async getById(id) {
     try {
       const resultado = await this.knex(this.tabla).where("id", id).select("*");
       const data = JSON.parse(JSON.stringify(resultado));
@@ -17,7 +17,7 @@ class ContenedorSQL {
     }
   }
 
-  async listarAll() {
+  async getAll() {
     try {
       const resultado = await this.knex(this.tabla).select("*");
       const data = JSON.parse(JSON.stringify(resultado));
@@ -27,7 +27,7 @@ class ContenedorSQL {
     }
   }
 
-  async guardar(elem) {
+  async createNew(elem) {
     try {
       const elemId = await this.knex(this.tabla).insert(elem);
       return elemId;
@@ -36,7 +36,7 @@ class ContenedorSQL {
     }
   }
 
-  async actualizar(elem, id) {
+  async updateById(id, elem) {
     try {
       await this.knex(this.tabla).where("id", id).update(elem);
     } catch (error) {
@@ -44,7 +44,7 @@ class ContenedorSQL {
     }
   }
 
-  async borrar(id) {
+  async deleteById(id) {
     try {
       await this.knex(this.tabla).where("id", id).del();
     } catch (error) {
@@ -52,7 +52,7 @@ class ContenedorSQL {
     }
   }
 
-  async borrarAll() {
+  async deleteAll() {
     try {
       await this.knex(this.tabla).del();
     } catch (error) {

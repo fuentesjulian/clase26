@@ -5,15 +5,16 @@ import * as msgsConfig from "../config/msgs.js";
 import * as msgNormalizer from "../utils/normalizer.js";
 import * as prodConfig from "../config/products.js";
 
-const productosApi = new MongoDbContainer(
-  prodConfig.prodCollection,
-  prodConfig.prodSchema
-);
+import msgsRepo from "../repos/msgsRepo.js";
+import prodsRepo from "../repos/prodsRepo.js";
+const mensajesApi = new msgsRepo();
+const productosApi = new prodsRepo()
+// const productosApi = new MongoDbContainer(prodConfig.prodCollection, prodConfig.prodSchema);
 
-const mensajesApi = new MongoDbContainer(
-  msgsConfig.msgsCollection,
-  msgsConfig.msgsSchema
-);
+// const mensajesApi = new MongoDbContainer(
+//   msgsConfig.msgsCollection,
+//   msgsConfig.msgsSchema
+// );
 
 const processMsgData = (msgData) => {
   const plainMsgs = msgData.map((msg) => {

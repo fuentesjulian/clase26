@@ -1,30 +1,38 @@
-class ContenedorMemoria {
+export default class ContenedorMemoria {
+  constructor() {
+    this.data = [];
+    this.id = 0;
+  }
 
-    constructor() {
-        this.elementos = []
-    }
+  async getById(id) {
+    return this.data.find((item) => item.id === id);
+  }
 
-    listar(id) {
-        
-    }
+  async getAll() {
+    return this.data;
+  }
 
-    listarAll() {
-        
-    }
+  async getByField(field, criteria) {
+    return this.data.find((item) => item[field] === criteria);
+  }
 
-    guardar(elem) {
-    }
+  async createNew(itemData) {
+    itemData.id = this.id++;
+    this.data.push(itemData);
+  }
 
-    actualizar(elem, id) {
+  async updateById(id, itemData) {
+    const oldItemData = this.data.find((item) => item.id === id);
+    const newItemData = { ...oldItemData, ...itemData };
+    this.data.filter((item) => item.id != id);
+    this.data.push(newItemData);
+  }
 
-    }
+  async deleteById(id) {
+    this.data.filter((item) => item.id != id);
+  }
 
-    borrar(id) {
-
-    }
-
-    borrarAll() {
-    }
+  async deleteAll() {
+    this.data = [];
+  }
 }
-
-export default ContenedorMemoria
