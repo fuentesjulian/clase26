@@ -8,12 +8,13 @@ node src/server.js
 El servidor puede recibir como argumentos:
 - **modo**: puede correrse en modo **FORK** o **CLUSTER**, en caso de no especificar se ejecutará en **modo FORK por default**. En modo FORK se ejecutarán 2 procesos: el padre y el hijo. En modo CLUSTER se ejecutará un proceso padre y tantos procesos fork como procesadores tenga el CPU (si el CPU tiene 4 procesadores, seran 5 procesos).
 - **port**: el puerto de escucha del servidor, en caso de no especificar el servidor escuchará en el **puerto 8080 por default**. 
+- **database**: el método de persistencia para la base de datos de produtos y mensajes, en caso de no especificar elegirá **mongoDB por default**. Las opciones son **mongo** para utilizar mongoDB, **file** para almacenar los datos en un archivo o **mem** para almancer en memoria (al reiniciar la app esta base se destruye) 
 
 **Ejemplos:**
 ```sh
-node src/server.js --port=8081 --mode=CLUSTER
-node src/server.js --port=8082 --mode=FORK
-node src/server.js -p=8081 -m=CLUSTER
+node src/server.js --port=8081 --mode=CLUSTER --database=mongo
+node src/server.js --port=8082 --mode=FORK --database=mem
+node src/server.js -p=8081 -m=CLUSTER --database=file
 node src/server.js -p=8082 -m=FORK
 ```
 ### Ejecución con **nodemon**
