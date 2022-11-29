@@ -14,4 +14,5 @@ const authorSchema = new mongoose.Schema({
 export const msgsSchema = new mongoose.Schema({
   author: authorSchema,
   text: String,
+  createdAt: { type: Date, default: Date.now(), immutable: true },
 });

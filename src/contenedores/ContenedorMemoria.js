@@ -18,6 +18,7 @@ export default class ContenedorMemoria {
 
   async createNew(itemData) {
     itemData.id = this.id++;
+    itemData.createdAt = new Date.now();
     this.data.push(itemData);
   }
 
