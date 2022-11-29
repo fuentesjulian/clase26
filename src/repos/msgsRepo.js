@@ -1,18 +1,21 @@
 import daoFactory from "../contenedores/daoFactory.js";
+import { asDto } from "../dtos/msgsDto.js";
 
 export default class msgsRepo {
   constructor() {
     this.dao = daoFactory.getDaoMsgs();
-    this.dao2 = daoFactory.getDaoMsgs();
-    console.log(this.dao === this.dao2);
+    //this.dao2 = daoFactory.getDaoMsgs();
+    //console.log(this.dao === this.dao2);
   }
 
   async getById(id) {
-    return await this.dao.getById(id);
+    const data = await this.dao.getById(id);
+    return asDto(data);
   }
 
   async getAll() {
-    return await this.dao.getAll();
+    const data = await this.dao.getAll();
+    return asDto(data);
   }
 
   async getByField(field, criteria) {

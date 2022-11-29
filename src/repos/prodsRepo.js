@@ -1,4 +1,5 @@
 import daoFactory from "../contenedores/daoFactory.js";
+import { asDto } from "../dtos/ProdsDto.js";
 
 export default class prodsRepo {
   constructor() {
@@ -6,11 +7,13 @@ export default class prodsRepo {
   }
 
   async getById(id) {
-    return await this.dao.getById(id);
+    const data = await this.dao.getById(id);
+    return asDto(data)
   }
 
   async getAll() {
-    return await this.dao.getAll();
+    const data = await this.dao.getAll();
+    return asDto(data)
   }
 
   async getByField(field, criteria) {

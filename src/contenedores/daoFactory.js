@@ -10,7 +10,7 @@ const option = "mongo";
 
 export default class daoFactory {
   constructor() {
-    this.data = Date.now();
+    this.uuid = Date.now();
     switch (option) {
       case "mongo":
         this.msgs = new MongoDbContainer(msgsConfig.msgsCollection, msgsConfig.msgsSchema);
@@ -37,7 +37,6 @@ export default class daoFactory {
     if (!dao) {
       dao = new daoFactory();
     }
-    console.log(dao.data);
     return dao.msgs;
   }
 

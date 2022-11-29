@@ -18,7 +18,7 @@ export default class ContenedorArchivo {
     // si el array tiene longitud cero (esta vacia) por default el id es 1
     const id = items.length > 0 ? items[items.length - 1].id + 1 : 1;
     // hago un spread del objeto y le agrego el id
-    obj = { ...obj, id, createdAt: new Date.now() };
+    obj = { ...obj, id, createdAt: Date.now() };
     // agrego el objeto al array de items
     items.push(obj);
     // convierto a string el array de items

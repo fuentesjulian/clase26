@@ -9,22 +9,9 @@ import msgsRepo from "../repos/msgsRepo.js";
 import prodsRepo from "../repos/prodsRepo.js";
 const mensajesApi = new msgsRepo();
 const productosApi = new prodsRepo()
-// const productosApi = new MongoDbContainer(prodConfig.prodCollection, prodConfig.prodSchema);
-
-// const mensajesApi = new MongoDbContainer(
-//   msgsConfig.msgsCollection,
-//   msgsConfig.msgsSchema
-// );
 
 const processMsgData = (msgData) => {
-  const plainMsgs = msgData.map((msg) => {
-    const dateTime = new Date(parseInt(msg.id.substring(0, 8), 16) * 1000);
-    delete msg.author["_id"];
-    delete msg["__v"];
-    msg = { ...msg, dateTime };
-    return msg;
-  });
-  const originalData = { id: "mensajes", mensajes: plainMsgs };
+  const originalData = { id: "mensajes", mensajes: msgData };
   return msgNormalizer.getNormalized(originalData);
 };
 

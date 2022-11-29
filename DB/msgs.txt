@@ -1,0 +1,15 @@
+[
+  {
+    "author": {
+      "id": "fuentesjuli@gmail.com",
+      "nombre": "Julian",
+      "apellido": "Fuentes",
+      "edad": "38",
+      "alias": "Juli",
+      "avatar": "ht"
+    },
+    "text": "ESte es un msj",
+    "id": 1,
+    "createdAt": 1669730086186
+  }
+]
