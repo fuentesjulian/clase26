@@ -1,12 +1,15 @@
 import MongoDbContainer from "./ContenedorMongoDB.js";
 import ContenedorArchivo from "./ContenedorArchivo.js";
 import ContenedorMemoria from "./ContenedorMemoria.js";
-
+import Yargs from "yargs";
 import * as msgsConfig from "../config/msgs.js";
 import * as prodConfig from "../config/products.js";
 
+const yargs = Yargs(process.argv.slice(2));
+const args = yargs.alias({ d: "database" }).default({ database: "mongo" }).argv;
+
 let dao = null;
-const option = "mongo";
+const option = args.database;
 
 export default class daoFactory {
   constructor() {

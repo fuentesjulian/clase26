@@ -6,10 +6,23 @@
       "apellido": "Fuentes",
       "edad": "38",
       "alias": "Juli",
-      "avatar": "ht"
+      "avatar": "http"
     },
-    "text": "ESte es un msj",
+    "text": "Este es un mensaje",
     "id": 1,
-    "createdAt": 1669730086186
+    "createdAt": 1669755024089
+  },
+  {
+    "author": {
+      "id": "fuentesjuli@gmail.com",
+      "nombre": "Julian",
+      "apellido": "Fuentes",
+      "edad": "38",
+      "alias": "Juli",
+      "avatar": "http"
+    },
+    "text": "Este es otro mensaje",
+    "id": 2,
+    "createdAt": 1669755029458
   }
 ]

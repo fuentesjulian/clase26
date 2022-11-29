@@ -3,7 +3,7 @@ const asDtoObj = (data) => {
     id: data.id,
     author: { id: data.author.id },
     text: data.text,
-    createdAt: data.createdAt,
+    createdAt: new Date(data.createdAt).toISOString(),
   };
 };
 

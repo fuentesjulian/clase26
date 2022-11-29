@@ -1,9 +1,9 @@
 [
   {
     "title": "Camara",
-    "price": 1000,
+    "price": 10000,
     "thumbnail": "https://imborrable.com/wp-content/uploads/2021/04/fotos-gratis-de-stock-1.jpg",
     "id": 1,
-    "createdAt": 1669730065227
+    "createdAt": 1669755011660
   }
 ]

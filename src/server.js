@@ -25,15 +25,9 @@ const runCluster = (port) => {
     }
   } else {
     const connectedServer = httpServer.listen(port, () => {
-      console.log(
-        `Servidor http escuchando en el puerto ${
-          connectedServer.address().port
-        }`
-      );
+      console.log(`Servidor http escuchando en el puerto ${connectedServer.address().port}`);
     });
-    connectedServer.on("error", (error) =>
-      console.log(`Error en servidor ${error}`)
-    );
+    connectedServer.on("error", (error) => console.log(`Error en servidor ${error}`));
   }
 };
 
@@ -42,21 +36,18 @@ const runCluster = (port) => {
 // toma como parametro el puerto
 const runNormal = (port) => {
   const connectedServer = httpServer.listen(port, () => {
-    console.log(
-      `Servidor http escuchando en el puerto ${connectedServer.address().port}`
-    );
+    console.log(`Servidor http escuchando en el puerto ${connectedServer.address().port}`);
   });
 };
 
 //--------------------------------------------
 // inicio el servidor
 const yargs = Yargs(process.argv.slice(2));
-const args = yargs
-  .alias({ p: "port", m: "mode" })
-  .default({ port: 8080, mode: "NORMAL" }).argv;
+const args = yargs.alias({ p: "port", m: "mode"}).default({ port: 8080, mode: "NORMAL" }).argv;
 
 const PORT = process.env.PORT || 8080;
 const MODE = args.mode;
+
 
 switch (MODE) {
   case "CLUSTER":
