@@ -1,0 +1,27 @@
+GET http://localhost:8080/api/products
+
+###
+POST http://localhost:8080/api/products
+Content-Type: application/json
+
+{
+    "title": "Remera",
+    "price": 10000,
+    "thumbnail": "http://d3ugyf2ht6aenh.cloudfront.net/stores/440/495/products/argentina-vamos-argentina-adelante1-03d5fe4c7350410db815922346590160-640-0.png"
+}
+
+###
+GET http://localhost:8080/api/products/638e809efe9d66875f2d8ff5
+
+###
+PUT http://localhost:8080/api/products/638e809efe9d66875f2d8ff5
+Content-Type: application/json
+
+{
+    "title": "Remera",
+    "price": 15000,
+    "thumbnail": "http://d3ugyf2ht6aenh.cloudfront.net/stores/440/495/products/argentina-vamos-argentina-adelante1-03d5fe4c7350410db815922346590160-640-0.png"
+}
+
+###
+DELETE http://localhost:8080/api/products/638e809efe9d66875f2d8ff5

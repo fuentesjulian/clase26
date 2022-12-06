@@ -8,12 +8,12 @@ export default class prodsRepo {
 
   async getById(id) {
     const data = await this.dao.getById(id);
-    return asDto(data)
+    return asDto(data);
   }
 
   async getAll() {
     const data = await this.dao.getAll();
-    return asDto(data)
+    return asDto(data);
   }
 
   async getByField(field, criteria) {
@@ -26,7 +26,7 @@ export default class prodsRepo {
   }
 
   async updateById(id, itemData) {
-    await this.dao.updateById(id, itemData);
+    const updatedItem = await this.dao.updateById(id, itemData);
   }
 
   async deleteById(id) {

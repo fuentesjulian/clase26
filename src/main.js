@@ -77,6 +77,11 @@ app.use("/info", infoRoutes);
 // agrego la ruta de la api generadora de nros randoms
 app.use("/api/randoms", randomGenRoutes);
 
+//--------------------------------------------
+// agrego la ruta de la api de productos
+import productRoutes from "./routes/productRoutes.js"
+app.use("/api/products", productRoutes)
+
 app.get("*", loggerMiddleware.notImplementedRoutes, (req,res)=>{
   const errorMsg = `Ruta: ${req.url}, metodo: ${req.method} NO IMPLEMENTADOS`;
   res.send(errorMsg)

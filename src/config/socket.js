@@ -8,7 +8,7 @@ import * as prodConfig from "../config/products.js";
 import msgsRepo from "../repos/msgsRepo.js";
 import prodsRepo from "../repos/prodsRepo.js";
 const mensajesApi = new msgsRepo();
-const productosApi = new prodsRepo()
+const productosApi = new prodsRepo();
 
 const processMsgData = (msgData) => {
   const originalData = { id: "mensajes", mensajes: msgData };
