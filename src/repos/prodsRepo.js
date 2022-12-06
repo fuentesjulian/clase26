@@ -8,12 +8,14 @@ export default class prodsRepo {
 
   async getById(id) {
     const data = await this.dao.getById(id);
-    return asDto(data);
+    if (data) return asDto(data);
+    return null;
   }
 
   async getAll() {
     const data = await this.dao.getAll();
-    return asDto(data);
+    if (data) return asDto(data);
+    return null;
   }
 
   async getByField(field, criteria) {
