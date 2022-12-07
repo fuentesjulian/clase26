@@ -6,7 +6,7 @@
   "main": "src/main.js",
   "scripts": {
     "start": "node ./src/server.js",
-    "test":"mocha ./tests/apirest.test.js --exit"
+    "test": "mocha ./tests/apirest.test.js --exit"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +18,7 @@
     "bcrypt": "^5.1.0",
     "compression": "^1.7.4",
     "connect-mongo": "^4.6.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.8",
     "express": "^4.18.1",

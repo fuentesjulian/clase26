@@ -5,12 +5,16 @@ import infoRoutes from "./routes/infoRoutes.js";
 import fakeProdsRoutes from "./routes/fakeProdsRoutes.js";
 import randomGenRoutes from "./routes/randomGenRoutes.js";
 import compression from "compression";
+import cors from "cors"
 //--------------------------------------------
 // instancio servidor, socket y api
 const app = express();
 export const httpServer = new HttpServer(app);
 const io = new Socket(httpServer);
 
+//--------------------------------------------
+// agrego cors
+app.use(cors())
 //--------------------------------------------
 // agrego middleware de compresion
 app.use(compression());
