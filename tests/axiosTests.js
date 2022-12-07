@@ -28,8 +28,6 @@ const deleteProduct = async (id) => {
 (async () => {
   const allProducts = await getAllProducts();
   console.log(allProducts);
-  const productById = await getProductById("638e7b0a943c76d0ba6157b4");
-  console.log(productById);
   const data = {
     title: "Remera",
     price: 15000,
@@ -38,6 +36,9 @@ const deleteProduct = async (id) => {
   };
   const newProduct = await createNewProduct(data);
   console.log("Producto nuevo", newProduct);
+
+  const productById = await getProductById(newProduct.id);
+  console.log(productById);
 
   const tempData = {
     title: "Remera",

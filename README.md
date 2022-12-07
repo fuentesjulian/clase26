@@ -104,3 +104,34 @@ pm2 start src/server.js --name=servidor5 --watch -- --port=8085
 ```
 Los servidores deberían estar corriendo en los puertos 8080, 8082, 8083, 8084 y 8085.
 Renombrar el archivo **nginx.conf.opt2** a **nginx.conf** y ubicarlo en la carpeta conf de nginx y luego ejecutar nginx. Nginx debería estar levantando el servidor en el puerto 80.
+### Testeos
+Se crearon dos scripts de testeos, uno hecho con axios como un módulo aparte y otro hecho con mocha, chai y supertest.
+##### Testeo con axios
+Para correr el test con axios se debe iniciar el servidor y, una vez corriendo, se debe ejecutar el siguiente comando:
+```sh
+node tests/axiosTests.js
+```
+En el mismo se testo:
+- Método **GET** para obtener todos los elementos de la base de datos
+- Método **GET** pasando un **id como parámetro** para obtener el elemento que tenga dicho id
+- Método **POST** para crear un nuevo elemento
+- Método **PUT** para editar un elemento
+- Méotodo **DELETE** para eliminar un elemento
+##### Testeo con mocha, chai y supertest
+Para correr el test con mocha, chai y supertest, ya se creó un script en el package.json. No hace falta iniciar el servidor. El mismo se ejecuta con el siguiente comando:
+```sh
+npm run test
+```
+**Los testeos incluyen:**
+- POST
+  - Al crear un item, deberia retornar status 201, un id y la data del item creado (95ms)
+- GET
+  - Al hacer un get, deberia retornar (1) status 200 y (2) un array (39ms)
+- GET /id
+  - Al hacer un get por el ID del item creado, deberia retornar (1) status 200 y (2) los datos del item creado
+- PUT /id
+  - Al editar el item creado, deberia retornar status 200
+  - La data en el server del item editado deberia hacer match con la data enviada para editar
+- DELETE
+  - Al eliminar el item, deberia retornar status 200
+  - Una vez eliminado el item, si lo busco por ID tiene que retornar un objeto vacio
