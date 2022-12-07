@@ -5,7 +5,8 @@
   "description": "",
   "main": "src/main.js",
   "scripts": {
-    "start": "node ./src/server.js"
+    "start": "node ./src/server.js",
+    "test":"mocha ./tests/apirest.test.js --exit"
   },
   "keywords": [],
   "author": "",
@@ -32,5 +33,10 @@
     "sqlite3": "^5.0.11",
     "winston": "^3.8.2",
     "yargs": "^17.6.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.1.0",
+    "supertest": "^6.3.2"
   }
 }

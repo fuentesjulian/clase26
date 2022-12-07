@@ -15,7 +15,6 @@ export const getProductById = async (req, res) => {
 };
 
 export const createNewProduct = async (req, res) => {
-  console.log(req.body)
   // desestructuro el req para quedarme con el body
   const { body } = req;
   // creo un producto, enviando el body
